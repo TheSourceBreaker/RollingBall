@@ -13,7 +13,7 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Boid")
+        if(other.CompareTag("Boid"))
         {
             boid.Agents.Add(other.GetComponent<Boid>());
         }
@@ -21,7 +21,7 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Boid")
+        if (other.CompareTag("Boid"))
         {
             boid.Agents.Remove(other.GetComponent<Boid>());
         }

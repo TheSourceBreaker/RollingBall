@@ -4,22 +4,91 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
+    Seek seek;
     public List<Boid> Agents = new List<Boid>();
 
-    bool Separation, Align, Cohes;
+    public int agentCount;
+    public bool Separation, Align, Cohes;
+
+    public float separateWeight;
+    public float alignWeight;
+    public float cohesionWeight;
 
     Vector3 separateForce;
+    Vector3 alignForce;
+    Vector3 cohesionForce;
+
+    Vector3 forceToApply;
+
+
 
     void Start()
     {
         separateForce = Vector3.zero;
+        alignForce = Vector3.zero;
+        cohesionForce = Vector3.zero;
     }
-
+   
     private void Update()
     {
-        foreach(Boid boid in Agents)
+        if(Separation == true)
         {
-            separateForce += 
+            if (agentCount == 0)
+            {
+                foreach (Boid boid in Agents)
+                {
+                    separateForce += transform.position - boid.transform.position;
+                    agentCount++;
+                }
+            }
+            else
+            {
+                foreach (Boid boid in Agents)
+                    separateForce += transform.position - boid.transform.position;
+            }
+
+            separateForce /= agentCount;
+            forceToApply = (separateForce - seek.CurrentVelocity) * separateWeight;///
         }
+        if(Align == true)
+        {
+            if(agentCount == 0)
+            {
+                foreach (Boid boid in Agents)
+                {
+                    //alignForce += boid.velocity
+                    agentCount++;
+                }
+            }
+            else
+            {
+                foreach (Boid boid in Agents) ;
+                    //alignForce += boid.velocity
+            }
+
+            alignForce /= agentCount;
+            forceToApply = (alignForce - seek.CurrentVelocity) * alignWeight;///
+        }
+        if(Cohes == true)
+        {
+            if (agentCount == 0)
+            {
+                foreach (Boid boid in Agents)
+                {
+                    cohesionForce += boid.transform.position - transform.position;
+                    agentCount++;
+                }
+            }
+            else
+            {
+                foreach(Boid boid in Agents)
+                    cohesionForce += boid.transform.position - transform.position;
+            }
+
+            cohesionForce /= agentCount;
+            forceToApply = (cohesionForce - seek.CurrentVelocity) * cohesionWeight;///
+        }
+
+        agentCount = 0;
     }
 }
