@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 377279919}
   - component: {fileID: 377279918}
   - component: {fileID: 377279917}
+  - component: {fileID: 377279921}
   - component: {fileID: 377279916}
   - component: {fileID: 377279915}
   - component: {fileID: 377279914}
@@ -224,17 +225,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377279912}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61e4e7c67f467e4cbfdc153da738d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wanderTarget: {x: 0, y: 0, z: 0}
-  currentSpeed: {x: 0, y: 0, z: 0}
   wanderTolerance: 0.2
   wanderRadius: 3
-  rotationSpeed: 2.5
-  maxSpeed: 10
 --- !u!114 &377279915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &377279916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!65 &377279917
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340,6 +336,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377279921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377279912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01248115ddb634c44ada9f520c8b967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  rotationSpeed: 3
+  MaxVelocity: 5
 --- !u!1 &587674394
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +420,7 @@ GameObject:
   - component: {fileID: 624326828}
   - component: {fileID: 624326827}
   - component: {fileID: 624326826}
+  - component: {fileID: 624326830}
   - component: {fileID: 624326825}
   - component: {fileID: 624326824}
   - component: {fileID: 624326823}
@@ -443,17 +455,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624326821}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61e4e7c67f467e4cbfdc153da738d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wanderTarget: {x: 0, y: 0, z: 0}
-  currentSpeed: {x: 0, y: 0, z: 0}
   wanderTolerance: 0.2
   wanderRadius: 3
-  rotationSpeed: 2.5
-  maxSpeed: 10
 --- !u!114 &624326824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &624326825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!65 &624326826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -559,6 +566,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &624326830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624326821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01248115ddb634c44ada9f520c8b967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  rotationSpeed: 3
+  MaxVelocity: 5
 --- !u!1 &645154350
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  dropForce: 3
 --- !u!54 &645154352
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -787,6 +810,7 @@ GameObject:
   - component: {fileID: 708369988}
   - component: {fileID: 708369987}
   - component: {fileID: 708369986}
+  - component: {fileID: 708369990}
   - component: {fileID: 708369985}
   - component: {fileID: 708369984}
   - component: {fileID: 708369983}
@@ -821,17 +845,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708369981}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61e4e7c67f467e4cbfdc153da738d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wanderTarget: {x: 0, y: 0, z: 0}
-  currentSpeed: {x: 0, y: 0, z: 0}
   wanderTolerance: 0.2
   wanderRadius: 3
-  rotationSpeed: 2.5
-  maxSpeed: 10
 --- !u!114 &708369984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +867,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &708369985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!65 &708369986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -937,6 +956,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &708369990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708369981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01248115ddb634c44ada9f520c8b967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  rotationSpeed: 3
+  MaxVelocity: 5
 --- !u!1 &752896212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1274,7 @@ GameObject:
   - component: {fileID: 1874163797}
   - component: {fileID: 1874163796}
   - component: {fileID: 1874163795}
+  - component: {fileID: 1874163801}
   - component: {fileID: 1874163793}
   - component: {fileID: 1874163794}
   - component: {fileID: 1874163799}
@@ -1258,14 +1293,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874163792}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffcdc6c20a2fc1f4fbd0827836a5934e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1874163794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,7 +1314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVelocity: 5
   Target: {fileID: 645154350}
-  CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!65 &1874163795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1363,17 +1396,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874163792}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61e4e7c67f467e4cbfdc153da738d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wanderTarget: {x: 0, y: 0, z: 0}
-  currentSpeed: {x: 0, y: 0, z: 0}
   wanderTolerance: 0.2
   wanderRadius: 3
-  rotationSpeed: 2.5
-  maxSpeed: 10
 --- !u!54 &1874163800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1390,3 +1420,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1874163801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874163792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01248115ddb634c44ada9f520c8b967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  rotationSpeed: 3
+  MaxVelocity: 5

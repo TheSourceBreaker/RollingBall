@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
-    Seek seek;
+    Agent agent;
     public List<Boid> Agents = new List<Boid>();
 
     public int agentCount;
@@ -48,7 +48,7 @@ public class Boid : MonoBehaviour
             }
 
             separateForce /= agentCount;
-            forceToApply = (separateForce - seek.CurrentVelocity) * separateWeight;///
+            forceToApply = (separateForce - agent.currentVelocity) * separateWeight;///
         }
         if(Align == true)
         {
@@ -67,7 +67,7 @@ public class Boid : MonoBehaviour
             }
 
             alignForce /= agentCount;
-            forceToApply = (alignForce - seek.CurrentVelocity) * alignWeight;///
+            forceToApply = (alignForce - agent.currentVelocity) * alignWeight;///
         }
         if(Cohes == true)
         {
@@ -86,7 +86,7 @@ public class Boid : MonoBehaviour
             }
 
             cohesionForce /= agentCount;
-            forceToApply = (cohesionForce - seek.CurrentVelocity) * cohesionWeight;///
+            forceToApply = (cohesionForce - agent.currentVelocity) * cohesionWeight;///
         }
 
         agentCount = 0;
