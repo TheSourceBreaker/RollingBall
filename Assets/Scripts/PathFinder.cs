@@ -7,7 +7,7 @@ public class PathFinder : MonoBehaviour
     Node node; // References an existing class
     List<Node> OpenList; // This references an already existing List of type Node
     List<Node> CloseList;
-    List<Node> routeBack = new List<Node>();
+    public List<Node> routeBack = new List<Node>();
 
     public static List<Node> allNodes = new List<Node>();
 
@@ -15,6 +15,8 @@ public class PathFinder : MonoBehaviour
     public Vector3 startPos;
 
     public float speed;
+    public float radius = .05f;
+    public int routeIndex = 0;
 
 
     public void Path(Node Begin, Node End)
@@ -23,7 +25,7 @@ public class PathFinder : MonoBehaviour
         CloseList = new List<Node>();
 
         Node currentNode = Begin;
-        OpenList.Add(Begin);
+        OpenList.Add(currentNode);
 
         while (currentNode != End) // fscore and sorting
         {
@@ -44,14 +46,12 @@ public class PathFinder : MonoBehaviour
             {
                 if(!CloseList.Contains(currentNode.neighbors[i]))
                 {
-                    currentNode.neighbors[i].gScore = currentNode.gScore + Vector3.Distance(currentNode.transform.position, currentNode.neighbors[i].transform.position);//gScore
+                    currentNode.neighbors[i].gScore = (currentNode.gScore * currentNode.neighbors[i].difficulty) + Vector3.Distance(currentNode.transform.position, currentNode.neighbors[i].transform.position);//gScore
                     currentNode.neighbors[i].hScore = Vector3.Distance(currentNode.transform.position, End.transform.position);//hScore
 
                     currentNode.neighbors[i].prevNode = currentNode; // currentNode is now the previous Node of the neighbor
                     OpenList.Add(currentNode.neighbors[i]);
                 }
-                else
-                    Debug.Log("Closelist contains neighbor" + "[" + i + "]");
             }
         }
 
@@ -69,59 +69,60 @@ public class PathFinder : MonoBehaviour
         Node startNode = allNodes[0];
         Node endNode = allNodes[0];
 
-        float minStartDist = 0;
-        float maxEndDist = 0;
+        float minStartDist = Mathf.Infinity;
+        float minEndDist = Mathf.Infinity;
 
         foreach (Node node in allNodes) // for each element inside the allNodes 
         {
-            float startDistance = Vector3.Distance(transform.position, node.transform.position); // checks the min and max of the startPos and endPos
-            float endDistance = Vector3.Distance(endPos, node.transform.position);
+            float newStartDistance = Vector3.Distance(transform.position, node.transform.position); // checks the min and max of the startPos and endPos
+            float newEndDistance = Vector3.Distance(endPos, node.transform.position);
 
+            
 
-            if (startDistance > minStartDist) // if 0 is < the min distance
+            if (newStartDistance < minStartDist) // if 0 is < the min distance/ looks for the distance closest to 0
             {
                 startNode = node;
-                minStartDist = startDistance;
+                minStartDist = newStartDistance;
             }
 
-            if(endDistance > maxEndDist) // if 0 is < the max distance
+            if(newEndDistance < minEndDist) // if 0 is < the max distance
             {
                 endNode = node;
-                maxEndDist = endDistance;
+                minEndDist = newEndDistance;
             }
         }
         Path(startNode, endNode);
     }
-
-    public void BackTrack()
-    {
-        for(int i = 0; i < CloseList.Count; i++)
-        {
-            CloseList[i].transform.position = transform.position;
-        }
-    }
-
-    void Start()
-    {
-
-    }
-
     void Update()
     {
-        Vector3 v = new Vector3();
-        //while (v != routeBack.)
-        //{
-
-        //}
-
-        for(int i = 0; i < routeBack.Count; i++)
+        if (Input.GetMouseButtonDown(0))
         {
-            if(v == routeBack[i].transform.position)
-            {
-                routeBack[i]
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // The ray spawns at the camera and aims torward the position of the mouse of the screen.
+            RaycastHit hit;
 
+            if(Physics.Raycast(ray, out hit)) // Raycast then grabs the information from the mouse's position and back then runs the code.
+            {
+                FindNewPath(hit.point); // Compared to .transform, which points to the exact co-ordinates of the object, .point points to the exact located that the mouse was on when it raycasted.
+            }
+        }
+        else if(routeIndex < routeBack.Count) // index is less than 3
+        {
+            transform.position += (routeBack[routeIndex].transform.position - transform.position).normalized * speed * Time.deltaTime; // keep moving
+
+            if (Vector3.Distance(transform.position, routeBack[routeIndex].transform.position) < radius) // They have gotten into range / made it to node[i]
+            {
+                routeIndex++; 
             }
         }
 
+        if(routeIndex == routeBack.Count) // index is equal to 3
+        {
+            routeIndex = 0;
+            routeBack.Clear();
+        }
     }
+    //void OnValidate()
+    //{
+    //    routeIndex = 0;
+    //}
 }

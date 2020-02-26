@@ -23,7 +23,7 @@ public class Wander : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, wanderTarget) < wanderTolerance)
+        if (Vector3.Distance(transform.position, wanderTarget) < wanderTolerance) // This keeps a steady space between two objects
         {
             NewTarget();
         }
@@ -32,8 +32,6 @@ public class Wander : MonoBehaviour
 
         force = v - agent.currentVelocity;
         agent.currentVelocity += force * Time.deltaTime;
-        //transform.position += agent.currentVelocity * Time.deltaTime;
-        
     }
 
     void NewTarget()

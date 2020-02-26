@@ -7,7 +7,6 @@ public class Node : MonoBehaviour
     public List<Node> neighbors = new List<Node>();
     public Node prevNode;
     public float difficulty;
-    [HideInInspector]
     public float gScore;
     public float hScore;
     public float fScore
@@ -27,15 +26,8 @@ public class Node : MonoBehaviour
         }
     }
 
-    private void OnMouseDown() // change the Beginning Node on mouse click
-    {
-        
-    }
-
     void Start()
     {
         PathFinder.allNodes.Add(this);
     }
-
-
 }
