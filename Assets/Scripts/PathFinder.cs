@@ -24,6 +24,8 @@ public class PathFinder : MonoBehaviour
         OpenList = new List<Node>();
         CloseList = new List<Node>();
 
+        float[] tmp1;
+
         Node currentNode = Begin;
         OpenList.Add(currentNode);
 
@@ -33,11 +35,23 @@ public class PathFinder : MonoBehaviour
 
             for (int i = 1; i < OpenList.Count; i++) // This loop sorts and finds the lowest fScore inside the list and equals it to the currNode
             {
-                if(OpenList[i].fScore < currentNode.fScore) // Reads through the node inside the list and compares its gScores with the currentNode's gscore
+                tmp1 = new float[OpenList.Count]; // PROBLEM the amount of of neighbor's neighbors there are "OpenList.Count"
+
+                foreach(Node neighbor in node.neighbors) //
+                {
+                    if (neighbor.neighbors[i].fScore < tmp1[i])
+                    {
+                        tmp1[i] = neighbor.neighbors[i].fScore;
+                    }
+                }
+                if (OpenList[i].fScore < currentNode.fScore) // Reads through the node inside the list and compares its gScores with the currentNode's gscore
                 {
                     currentNode = OpenList[i]; // If true, then current node is = to the specific list spot
                 }
+
+
             }
+            
 
             OpenList.Remove(currentNode);
             CloseList.Add(currentNode); // Add currentNode to ClosedList
@@ -46,8 +60,11 @@ public class PathFinder : MonoBehaviour
             {
                 if(!CloseList.Contains(currentNode.neighbors[i]))
                 {
-                    currentNode.neighbors[i].gScore = (currentNode.gScore * currentNode.neighbors[i].difficulty) + Vector3.Distance(currentNode.transform.position, currentNode.neighbors[i].transform.position);//gScore
+                    currentNode.neighbors[i].gScore = currentNode.gScore + (currentNode.neighbors[i].difficulty * Vector3.Distance(currentNode.transform.position, currentNode.neighbors[i].transform.position));//gScore
                     currentNode.neighbors[i].hScore = Vector3.Distance(currentNode.transform.position, End.transform.position);//hScore
+
+                    currentNode.neighbors[i].neighbors[i].gScore = currentNode.neighbors[i].gScore + (currentNode.neighbors[i].neighbors[i].difficulty * Vector3.Distance(currentNode.neighbors[i].transform.position, currentNode.neighbors[i].neighbors[i].transform.position));//gScore
+                    currentNode.neighbors[i].neighbors[i].hScore = Vector3.Distance(currentNode.neighbors[i].transform.position, End.transform.position);//hScore
 
                     currentNode.neighbors[i].prevNode = currentNode; // currentNode is now the previous Node of the neighbor
                     OpenList.Add(currentNode.neighbors[i]);
@@ -64,7 +81,7 @@ public class PathFinder : MonoBehaviour
     }
     
 
-    public void FindNewPath( Vector3 endPos)
+    public void FindNewPath(Vector3 endPos)
     {
         Node startNode = allNodes[0];
         Node endNode = allNodes[0];

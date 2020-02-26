@@ -7,8 +7,8 @@ public class Node : MonoBehaviour
     public List<Node> neighbors = new List<Node>();
     public Node prevNode;
     public float difficulty;
-    public float gScore;
-    public float hScore;
+    public float gScore; // Cost
+    public float hScore; // Heuristic
     public float fScore
     {
         get
